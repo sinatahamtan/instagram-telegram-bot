@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: instagram-telegram-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 1 -b 0.0.0.0:$PORT app:app
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: WEBHOOK_SECRET
+        sync: false
+      - key: ALLOWED_CHAT_IDS
+        sync: false
+      - key: MAX_FILE_MB
+        value: "49"
